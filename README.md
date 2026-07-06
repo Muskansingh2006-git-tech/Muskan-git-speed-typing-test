@@ -1,12 +1,15 @@
 # SPEED TYPING TEST.
 
-A short description of your project.
+A terminal based speed typing test.
 
 ## Features
 
 - Time.
 - Accuracy.
 - Word per minute.
+## Future plans.
+-........
+-.......
 
 ## Installation
 
