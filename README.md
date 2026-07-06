@@ -14,6 +14,6 @@ A terminal based speed typing test.
 ## Installation
 
 ```bash
-git clone https://
+git clone https://github.com/Muskansingh2006-git-tech/Muskan-git-speed-typing-test.git
 cd project
 npm install
