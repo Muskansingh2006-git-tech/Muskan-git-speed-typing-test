@@ -3,10 +3,13 @@
 #include <cstdlib>
 #include<string>
 #include<chrono>
+#include<fstream>
 using namespace std;
 void showMenu();
 void startTest();
 void showInstructions();
+double loadHighScore();
+void saveHighScore(double score);
 
 int main() {
 
@@ -46,13 +49,13 @@ void showMenu(){
 void startTest()
 
 {
-    cout << "\nStarting Test...\n";
+    cout << "\nType this sentecne...\n";
     
-vector <string> para={ "The quick brown fox jumps over the lazy dog.",
-    "Practice makes a person better every day.",
-    "Programming is fun when you understand the basics.",
-    "Never stop learning new things.",
-    "Typing speed improves with regular practice."};
+vector <string> para={ "The quick brown fox jumps over the lazy dog.\n",
+    "Practice makes a person better every day.\n",
+    "Programming is fun when you understand the basics.\n",
+    "Never stop learning new things.\n",
+    "Typing speed improves with regular practice.\n"};
 srand(time(0));              
 int index = rand() % para.size();
 
@@ -80,7 +83,7 @@ for(auto i=0; i<original.size() && i<typed.size(); i++) {
       correct++;
         cout<<" ";
    } else {
-        cout<<"^"<<endl;
+        cout<<"~~~"<<endl;
         mistake++;
 }
 }
@@ -96,6 +99,16 @@ for(auto ch:typed) {
 }
 
 double wpm=(double (word) /int (time_taken))*60;
+double highScore = loadHighScore();
+
+if (wpm > highScore)
+{
+    saveHighScore(wpm);
+    highScore = wpm;      // Variable bhi update kar do
+    cout << "\n🎉 New High Score!\n";
+}
+cout<<"============Result============"<<endl;
+cout << "Highest WPM : " << highScore << endl;
 cout<<endl;
 cout<<"time taken"<<time_taken<<"sec"<<endl;
 cout<<"accuracy"<<accuracy<<"%"<<endl;
@@ -106,5 +119,29 @@ cout << "\nInstructions\n";
     cout << "1. Type exactly as shown.\n";
     cout << "2. Press Enter when finished.\n";
     cout << "3. Your WPM and Accuracy will be calculated.\n";
+}
+double loadHighScore()
+{
+    ifstream file("highscore.txt");
+
+    if(!file)
+    {
+        return 0;
+    }
+
+    double score;
+    file>>score;
+    file.close();
+
+    return score;
+}
+void saveHighScore(double score)
+{
+    ofstream file("highscore.txt");
+    file<<score;
+
+    // score ko file me likho
+
+    file.close();
 }
 
